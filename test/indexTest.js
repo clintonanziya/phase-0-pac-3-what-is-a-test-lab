@@ -1,25 +1,29 @@
-require ( './root.js' );
+const fs = require('fs');
+const jsdom = require('jsdom-global');
 
-const { name, height, message } = require("../index.js");
+const path = require('path');
+const chai = require('chai');
 
-describe("what-is-a-test", () => {
-  describe("Name", () => {
-    it('returns "Susan"', () => {
-      expect(name).toEqual("Susan");
+const { name, height, message } = require('../index.js');
+
+const expect = chai.expect;
+
+describe('what-is-a-test', () => {
+  describe('Name', () => {
+    it('returns "Joe"', () => {
+      expect(name).to.equal('Joe');
     });
   });
 
-  describe("Height", () => {
-    it("is less than 40 and greater than 0", () => {
-      expect(height).toBeMoreThan(0)
-      expect(height).toBeLessThan(40);
+  describe('Height', () => {
+    it('is 74', () => {
+      expect(height).to.equal(74);
     });
   });
 
-  describe("Message", () => {
-    it("gives the name and height", () => {
-      expect(message).toInclude(name);
-      expect(message).toInclude(height);
+  describe('Message', () => {
+    it('gives the name and height', () => {
+      expect(message).to.match(new RegExp(`${name} is ${height} inches tall`));
     });
   });
 });
